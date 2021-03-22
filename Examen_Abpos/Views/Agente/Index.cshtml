@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Examen_Abpos.Models.DB.Actividad>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAgente.cshtml";
+}
+<h1 class="display-4">Inicio Agente</h1>
+<hr class="my-4" />
+<a class="btn btn-primary btn-lg btn-block" asp-action="AgregarRegistro" asp-controller="Agente">Agregar Registro</a>
+<hr class="my-4" />
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.MotivoLlamada</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.DuracionLlamada Minutos</h6>
+                        <p class="card-text">@item.DescripLlamada</p>
+                        @if (item.Resuelto)
+                        {
+                            <span class="alert alert-info">Resuleto</span>
+                        }
+                        else
+                        {
+                            <span class="alert alert-danger">No resuelto</span>
+                        }
+                        <a asp-action="Detalle" asp-route-id="@item.IdActividad" class="card-link">Detalle</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

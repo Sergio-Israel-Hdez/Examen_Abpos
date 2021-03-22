@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutSupervisor.cshtml";
+}
+
+<h1 class="display-4">Inicio Supervisor</h1>
+<hr class="my-4" />
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="jumbotron">
+                <h1 class="display-4">@ViewBag.CantidadLlamadas</h1>
+                <p class="lead">Cantidad de llamadas atendidas.</p>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="jumbotron">
+                <h1 class="display-4">@ViewBag.CantidadNoResuelto</h1>
+                <p class="lead">Cantidad de llamadas no resueltas.</p>
+                <hr class="my-4" />
+                <h1 class="display-4">@ViewBag.CantidadResuelto</h1>
+                <p class="lead">Cantidad de llamadas  resueltas.</p>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="jumbotron">
+                <ul>
+                    @foreach (var item in ViewBag.AgentesMasLLamadas as IEnumerable<Examen_Abpos.Models.DB.Usuario>)
+                    {
+                        <li>@item.Nombre</li>
+                    }
+                </ul>
+                <p class="lead">Agentes con mas llamadas.</p>
+                <hr class="my-4" />
+                <ul>
+                    @foreach (var item in ViewBag.AgentesMenosLLamadas as IEnumerable<Examen_Abpos.Models.DB.Usuario>)
+                    {
+                        <li>@item.Nombre</li>
+                    }
+                </ul>
+                <p class="lead">Agentes con menos llamadas.</p>
+            </div>
+        </div>
+    </div>
+</div>
