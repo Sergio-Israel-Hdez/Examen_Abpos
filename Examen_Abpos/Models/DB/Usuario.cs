@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Examen_Abpos.Models.DB
 {
@@ -11,8 +12,11 @@ namespace Examen_Abpos.Models.DB
         }
 
         public int IdUsuario { get; set; }
+        [Required]
         public string Nombre { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
         public int Rol { get; set; }
 
