@@ -1,5 +1,5 @@
 1-*formularios con captcha
-  *Eliminar informacion sensible de BBDD
+  *Eliminar informacion sensible respecto a BBDD
 2-*Eliminacion de using 
   *Patrones como Patron Repositorio
   *No realizar filtros de datos en un IEnumerable

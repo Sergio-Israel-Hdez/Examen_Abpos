@@ -1,15 +1,12 @@
-﻿using Examen_Abpos.Models;
+﻿using Examen_Abpos.Connection.IRepository;
+using Examen_Abpos.Connection.Repository;
+using Examen_Abpos.Models;
+using Examen_Abpos.Models.DB;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Examen_Abpos.Models.DB;
-using Examen_Abpos.Connection.IRepository;
-using Examen_Abpos.Connection.Repository;
-using Microsoft.AspNetCore.Http;
 
 namespace Examen_Abpos.Controllers
 {
@@ -21,7 +18,7 @@ namespace Examen_Abpos.Controllers
         private IRepository<Usuario> _usuario = null;
         private abposus_dbContext _context = null;
 
-        public HomeController(ILogger<HomeController> logger,abposus_dbContext context)
+        public HomeController(ILogger<HomeController> logger, abposus_dbContext context)
         {
             _logger = logger;
             this._context = context;

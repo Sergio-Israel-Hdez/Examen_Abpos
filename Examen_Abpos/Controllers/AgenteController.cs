@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Examen_Abpos.Connection.IRepository;
-using Examen_Abpos.Models.DB;
+﻿using Examen_Abpos.Connection.IRepository;
 using Examen_Abpos.Connection.Repository;
+using Examen_Abpos.Models.DB;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
 
 namespace Examen_Abpos.Controllers
 {
@@ -34,10 +32,10 @@ namespace Examen_Abpos.Controllers
         {
             int? rol = HttpContext.Session.GetInt32(SessionRol);
             int? id = HttpContext.Session.GetInt32(SessionId);
-            if (rol != 1 || rol==null)
+            if (rol != 1 || rol == null)
                 return RedirectToAction("Index", "Home");
-            var result_activadad = _actividad.Get(filter: x => x.IdUsuario == id,orderBy:null,includeProperties: "IdTipoNavigation");
-            ViewBag.ordenResuelto = String.IsNullOrEmpty(orden)?"resuelto_desc":"";
+            var result_activadad = _actividad.Get(filter: x => x.IdUsuario == id, orderBy: null, includeProperties: "IdTipoNavigation");
+            ViewBag.ordenResuelto = String.IsNullOrEmpty(orden) ? "resuelto_desc" : "";
             ViewBag.ordenConsulta = orden == "consulta" ? "consulta" : "consulta";
             ViewBag.ordenReclamo = orden == "reclamo" ? "reclamo" : "reclamo";
             switch (orden)

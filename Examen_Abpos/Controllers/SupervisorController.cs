@@ -1,13 +1,10 @@
 ﻿using Examen_Abpos.Connection.IRepository;
 using Examen_Abpos.Connection.Repository;
 using Examen_Abpos.Models.DB;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Examen_Abpos.Controllers
 {
@@ -37,7 +34,7 @@ namespace Examen_Abpos.Controllers
             ViewBag.CantidadNoResuelto = _actividad.Get(filter: x => x.Resuelto == false).Count();
             ViewBag.CantidadResuelto = _actividad.Get(filter: x => x.Resuelto == true).Count();
 
-            ViewBag.AgentesMasLLamadas = _usuario.Get(filter: x=>x.Rol==1, orderBy: x => x.OrderByDescending(x => x.Actividad.Count())).Take(3);
+            ViewBag.AgentesMasLLamadas = _usuario.Get(filter: x => x.Rol == 1, orderBy: x => x.OrderByDescending(x => x.Actividad.Count())).Take(3);
             ViewBag.AgentesMenosLLamadas = _usuario.Get(filter: x => x.Rol == 1, orderBy: x => x.OrderBy(x => x.Actividad.Count())).Take(3);
             return View();
         }
