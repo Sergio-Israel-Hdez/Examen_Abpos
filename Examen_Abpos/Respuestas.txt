@@ -1,5 +1,6 @@
-1-utilizar encriptacion en password y en informacion sencible
+1-*formularios con captcha
+  *Eliminar informacion sensible de BBDD
 2-*Eliminacion de using 
   *Patrones como Patron Repositorio
-  *Buena codificacion
+  *No realizar filtros de datos en un IEnumerable
 3-ejecucion de tareas in diferentes hilos sin la necesidad de culminar con la tarea anterior
