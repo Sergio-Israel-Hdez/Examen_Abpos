@@ -30,13 +30,31 @@ namespace Examen_Abpos.Controllers
             _tipo = new BaseRepository<TipoLlamada>(_context);
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string orden)
         {
             int? rol = HttpContext.Session.GetInt32(SessionRol);
             int? id = HttpContext.Session.GetInt32(SessionId);
             if (rol != 1 || rol==null)
                 return RedirectToAction("Index", "Home");
             var result_activadad = _actividad.Get(filter: x => x.IdUsuario == id,orderBy:null,includeProperties: "IdTipoNavigation");
+            ViewBag.ordenResuelto = String.IsNullOrEmpty(orden)?"resuelto_desc":"";
+            ViewBag.ordenConsulta = orden == "consulta" ? "consulta" : "consulta";
+            ViewBag.ordenReclamo = orden == "reclamo" ? "reclamo" : "reclamo";
+            switch (orden)
+            {
+                case "resuelto_desc":
+                    result_activadad = result_activadad.OrderByDescending(x => x.Resuelto);
+                    break;
+                case "consulta":
+                    result_activadad = result_activadad.OrderBy(x => x.IdTipo);
+                    break;
+                case "reclamo":
+                    result_activadad = result_activadad.OrderByDescending(x => x.IdTipo);
+                    break;
+                default:
+                    result_activadad = result_activadad.OrderBy(x => x.Resuelto);
+                    break;
+            }
             return View(result_activadad);
         }
         public IActionResult Detalle(int id)
@@ -79,6 +97,7 @@ namespace Examen_Abpos.Controllers
             if (rol != 1 || rol == null)
                 return RedirectToAction("Index", "Home");
             int? id = HttpContext.Session.GetInt32(SessionId);
+            ViewBag.tipo_llamada = _tipo.Get();
             return View();
         }
         [HttpPost]
@@ -89,7 +108,10 @@ namespace Examen_Abpos.Controllers
             if (rol != 1 || rol == null)
                 return RedirectToAction("Index", "Home");
             if (!ModelState.IsValid)
-                return RedirectToAction("Index", "Home");
+            {
+                ViewBag.tipo_llamada = _tipo.Get();
+                return View(actividad);
+            }
             Actividad new_actividad = new Actividad();
             new_actividad.DuracionLlamada = actividad.DuracionLlamada;
             new_actividad.DescripLlamada = actividad.DescripLlamada;

@@ -7,6 +7,23 @@
 <hr class="my-4" />
 <a class="btn btn-primary btn-lg btn-block" asp-action="AgregarRegistro" asp-controller="Agente">Agregar Registro</a>
 <hr class="my-4" />
+<div class="text-right form-inline">
+    <form method="get" action=@Url.Action("Index","Agente")>
+        <div class="btn-group" role="group">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Ordenar por
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li> @Html.ActionLink("Resuelto", "Index", new { orden = ViewBag.ordenResuelto })</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Consulta", "Index", new { orden = ViewBag.ordenConsulta })</li>
+                <li role="separator" class="divider"></li>
+                <li>@Html.ActionLink("Reclamo", "Index", new { orden = ViewBag.ordenReclamo })</li>
+            </ul>
+        </div>
+    </form>
+</div>
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
