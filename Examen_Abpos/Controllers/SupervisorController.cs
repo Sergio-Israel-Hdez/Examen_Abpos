@@ -40,6 +40,9 @@ namespace Examen_Abpos.Controllers
         }
         public IActionResult Crear()
         {
+            int? rol = HttpContext.Session.GetInt32(SessionRol);
+            if (rol != 2 || rol == null)
+                return RedirectToAction("Index", "Home");
             return View();
         }
         [HttpPost]
@@ -58,6 +61,9 @@ namespace Examen_Abpos.Controllers
         }
         public IActionResult CrearSupervisor()
         {
+            int? rol = HttpContext.Session.GetInt32(SessionRol);
+            if (rol != 2 || rol == null)
+                return RedirectToAction("Index", "Home");
             return View();
         }
         [HttpPost]
@@ -74,6 +80,7 @@ namespace Examen_Abpos.Controllers
             _usuario.Save();
             return RedirectToAction("Index");
         }
+
         public IActionResult Desconectar()
         {
             int? rol = HttpContext.Session.GetInt32(SessionRol);
