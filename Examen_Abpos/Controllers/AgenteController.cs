@@ -63,7 +63,7 @@ namespace Examen_Abpos.Controllers
                 return View(actividad);
             Actividad new_actividad = _actividad.GetById(actividad.IdActividad);
             new_actividad.Resuelto = actividad.Resuelto;
-            new_actividad.MotivoLlamada = actividad.MotivoLlamada;
+            new_actividad.IdTipo = actividad.IdTipo;
             new_actividad.DescripLlamada = actividad.DescripLlamada;
             new_actividad.DuracionLlamada = actividad.DuracionLlamada;
             _actividad.Update(new_actividad);
@@ -90,7 +90,7 @@ namespace Examen_Abpos.Controllers
             Actividad new_actividad = new Actividad();
             new_actividad.DuracionLlamada = actividad.DuracionLlamada;
             new_actividad.DescripLlamada = actividad.DescripLlamada;
-            new_actividad.MotivoLlamada = actividad.MotivoLlamada;
+            new_actividad.IdTipo = actividad.IdTipo;
             new_actividad.Resuelto = actividad.Resuelto;
             new_actividad.IdUsuario = id;
             _actividad.Insert(new_actividad);
