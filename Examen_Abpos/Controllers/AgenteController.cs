@@ -18,6 +18,7 @@ namespace Examen_Abpos.Controllers
         private readonly ILogger<AgenteController> _logger;
         private IRepository<Actividad> _actividad = null;
         private IRepository<Usuario> _usuario = null;
+        private IRepository<TipoLlamada> _tipo = null;
         private abposus_dbContext _context = null;
 
         public AgenteController(ILogger<AgenteController> logger, abposus_dbContext context)
@@ -26,6 +27,7 @@ namespace Examen_Abpos.Controllers
             this._context = context;
             _actividad = new BaseRepository<Actividad>(_context);
             _usuario = new BaseRepository<Usuario>(_context);
+            _tipo = new BaseRepository<TipoLlamada>(_context);
         }
 
         public IActionResult Index()
@@ -34,7 +36,7 @@ namespace Examen_Abpos.Controllers
             int? id = HttpContext.Session.GetInt32(SessionId);
             if (rol != 1 || rol==null)
                 return RedirectToAction("Index", "Home");
-            var result_activadad = _actividad.Get(filter: x => x.IdUsuario == id);
+            var result_activadad = _actividad.Get(filter: x => x.IdUsuario == id,orderBy:null,includeProperties: "IdTipoNavigation");
             return View(result_activadad);
         }
         public IActionResult Detalle(int id)
@@ -51,6 +53,7 @@ namespace Examen_Abpos.Controllers
             if (rol != 1 || rol == null)
                 return RedirectToAction("Index", "Home");
             var result_activadad = _actividad.GetById(id);
+            ViewBag.tipo_llamada = _tipo.Get();
             return View(result_activadad);
         }
         [HttpPost]

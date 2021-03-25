@@ -37,7 +37,7 @@ namespace Examen_Abpos.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(Usuario user)
+        public IActionResult Login(LoginViewModel user)
         {
             if (!ModelState.IsValid)
             {

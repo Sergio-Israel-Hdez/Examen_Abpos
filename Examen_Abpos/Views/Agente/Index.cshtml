@@ -14,10 +14,10 @@
             <div class="col-sm">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">@item.MotivoLlamada</h5>
+                        <h5 class="card-title">@item.IdTipoNavigation.NombreTipo</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.DuracionLlamada Minutos</h6>
                         <p class="card-text">@item.DescripLlamada</p>
-                        @if (item.Resuelto)
+                        @if (Convert.ToBoolean(item.Resuelto))
                         {
                             <span class="alert alert-info">Resuleto</span>
                         }
